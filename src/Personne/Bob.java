@@ -1,5 +1,7 @@
 package Personne;
 
+import CryptoSysteme.CryptoSysteme;
+
 /**
  *
  * @author Dylan

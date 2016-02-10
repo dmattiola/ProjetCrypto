@@ -6,7 +6,7 @@ import CryptoSysteme.CryptoSysteme;
  *
  * @author Dylan
  */
-public class Bob {
+public class Bob extends Thread {
     
     private CryptoSysteme cs;
     

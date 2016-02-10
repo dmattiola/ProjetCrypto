@@ -16,8 +16,9 @@ import java.util.ArrayList;
  *
  * @author Dylan
  */
-public class Alice {
-    private CryptoSysteme cs;
+public class Alice extends Thread {
+    
+    public CryptoSysteme cs;
     private ArrayList<Reponse> listReponses;
     
     public Alice(CryptoSysteme cs, ListeQuestions listeQ){
@@ -28,4 +29,9 @@ public class Alice {
             listReponses.add(reponse);
         }
     }
+
+    public ArrayList<Reponse> getListReponses(){ return listReponses; }
+
+    public void setListReponses(ArrayList<Reponse> listReponses){ this.listReponses = listReponses; }
+    
 }

@@ -46,34 +46,32 @@ public class BobFaille extends Personne.Bob {
                     listeReponseEncryptee.add(rep);
                 }
             }
-            
+            String reponses = "";
+            ArrayList<BigInteger> listAleatoire = new ArrayList<>();
+            ArrayList<Integer> ecart = new ArrayList<>();
+            ecart.add(0);
             for (int i = 0; i < listeReponseEncryptee.size(); i++){
-                System.out.println("Bob : Numéro Réponse Selectionnée : "+(i+1));
-                System.out.println("Bob : Réponse Selectionnée Encryptée :"+listeReponseEncryptee.get(i));
                 BigInteger reponse = new BigInteger(listeReponseEncryptee.get(i));
-                // on a choisit notre réponse
-                // on multiplie l'aléatoire à la réponse choisie
-                BigInteger aleatoire, nbAleatoire;
-                do{
-                    nbAleatoire = new BigInteger(Integer.toString(new Random().nextInt(512)));
-                    System.out.println("Bob : NB aléatoire à ajouter : "+nbAleatoire);
-                    aleatoire = cs.encrypter(nbAleatoire);
-                } while (aleatoire == null);
-                BigInteger reponseChoisie = aleatoire.multiply(reponse);
-                System.out.println("Bob : Réponse Selectionnée Modifiée Aleatoire :"+reponseChoisie);
-
-                // on envoie la réponse choisie
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                bw.write(reponseChoisie.toString() + '\n');
-                bw.flush();
-
-                // on reçoit la réponse décrypter par alice que bob peut décryter pour connaitre la réponse
-                String reponseAlice = br.readLine();
-                System.out.println("Bob : Reponse Decryptée Aleatoire Reçu : "+reponseAlice);
-                BigInteger reponseFinale = new BigInteger(reponseAlice).subtract(nbAleatoire);
-                System.out.println("Bob : Reponse Decryptée Originale : "+reponseFinale);
-                System.out.println("Bob : Texte original : "+new String(reponseFinale.toByteArray()));
+                reponses = reponses+reponse.toString();
             }
+            BigInteger aleatoire, nbAleatoire;
+            do{
+                nbAleatoire = new BigInteger(Integer.toString(new Random().nextInt(512)));
+                listAleatoire.add(nbAleatoire);
+                aleatoire = cs.encrypter(nbAleatoire);
+            } while (aleatoire == null);
+            BigInteger repppp = new BigInteger(reponses).multiply(aleatoire);
+            // on envoie la réponse choisie
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+            bw.write(repppp.toString() + '\n');
+            bw.flush();
+            
+            // on reçoit la réponse décrypter par alice que bob peut décryter pour connaitre la réponse
+            String reponseAlice = br.readLine();
+            System.out.println("Bob : Reponse Decryptée Aleatoire Reçu : "+reponseAlice);
+            BigInteger reponseFinale = new BigInteger(reponseAlice).subtract(nbAleatoire);
+            System.out.println("Bob : Reponse Decryptée Originale : "+reponseFinale);
+            System.out.println("Bob : Texte original : "+new String(reponseFinale.toByteArray()));
             
             //Fin de échanges
             s.close();

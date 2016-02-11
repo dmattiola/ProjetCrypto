@@ -8,7 +8,7 @@ import CryptoSysteme.CryptoSysteme;
  */
 public class Bob extends Thread {
     
-    private CryptoSysteme cs;
+    public CryptoSysteme cs;
     
     public Bob(CryptoSysteme cs){
         this.cs = cs;

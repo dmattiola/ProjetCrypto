@@ -18,14 +18,14 @@ import java.util.ArrayList;
  */
 public class Alice extends Thread {
     
-    public CryptoSysteme cs;
+    public static CryptoSysteme cs;
     private ArrayList<Reponse> listReponses;
     
     public Alice(CryptoSysteme cs, ListeQuestions listeQ){
         this.cs = cs;
         listReponses = new ArrayList<>();
         for(Question q : listeQ.getListeQuestion()){
-            Reponse reponse = new Reponse(q,"R"+q.getNum()+" : Réponse n°"+q.getNum());
+            Reponse reponse = new Reponse(q,"Reponse numero "+q.getNum());
             listReponses.add(reponse);
         }
     }
